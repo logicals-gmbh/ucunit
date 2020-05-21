@@ -47,17 +47,40 @@ def setProperty(doc, props, name, value):
     props.appendChild(p)
 
 
+def prettyPrintJsonIfPossible(s):
+    try:
+        j = json.loads(s)
+    except json.decoder.JSONDecodeError:
+        print(s)
+        return
+    print(json.dumps(j, indent=2))
+
+
 def main():
     try:
         processOutput = subprocess.check_output(sys.argv[2:])
         retVal = 0
     except (OSError):
+        print("OSError. Process output:")
+        prettyPrintJsonIfPossible(processOutput)
         sys.exit(1)
     except subprocess.CalledProcessError as exc:
         processOutput = exc.output
         retVal = exc.returncode
+        print("CalledProcessError. Process output:")
+        prettyPrintJsonIfPossible(processOutput)
+        print("Return code: " + str(retVal))
 
-    data = json.loads(processOutput)
+    inp = processOutput.decode('ascii')
+    try:
+        data = json.loads(inp)
+    except json.decoder.JSONDecodeError as err:
+        print("Process output:")
+        print(processOutput)
+        print("Decoded output:")
+        print(inp)
+        print("End")
+        raise err
     impl = getDOMImplementation()
 
     doc = impl.createDocument(None, "testsuite", None)
@@ -94,6 +117,9 @@ def main():
                 f = doc.createElement("failure")
                 f.appendChild(doc.createTextNode(failures))
                 tcelement.appendChild(f)
+        else:
+            if tc:
+                raise Exception('Invalid test case')
 
     with open(sys.argv[1], mode='w') as fh:
         fh.write(doc.toxml('utf-8').decode('utf-8'))

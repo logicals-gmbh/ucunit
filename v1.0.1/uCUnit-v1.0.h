@@ -206,6 +206,13 @@ static int ucunit_action = UCUNIT_ACTION_WARNING; /* Action to take if a check f
 static int ucunit_checkpoints[UCUNIT_MAX_TRACEPOINTS]; /* Max. number of tracepoints */
 static int ucunit_index = 0; /* Tracepoint index */
 
+void ucunit_suppresswarnings()
+{
+  /* This function is defined to avoid warnings of unused variables */
+  (void)ucunit_checkpoints;
+  (void)ucunit_index;
+}
+
 /*****************************************************************************/
 /* Internal (private) Macros                                                 */
 /*****************************************************************************/
@@ -429,7 +436,7 @@ static int ucunit_index = 0; /* Tracepoint index */
  *
  */
 #define UCUNIT_CheckIsInRange(value, lower, upper)   \
-    UCUNIT_Check( ( (value>=lower) && (value<=upper) ), "IsInRange", UCUNIT_ArgsToString(value, lower, upper) )
+    UCUNIT_Check( ( (value>=lower) && (value<=upper) ), "IsInRange", UCUNIT_ArgsToString(value, lower, upper))
 
 /**
  * @Macro:       UCUNIT_CheckIs8Bit(value)
