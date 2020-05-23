@@ -60,7 +60,7 @@
  *               device or network. In some cases you will have
  *               also to implement a putch(char c) function.
  */
-#define UCUNIT_WriteString(msg)    System_WriteString(msg)
+#define UCUNIT_WriteString(msg) System_WriteString(msg)
 
 /**
  * @Macro:       UCUNIT_WriteInt(n)
@@ -78,7 +78,7 @@
  *               device or network. In some cases you will have
  *               also to implement a putch(char c) function.
  */
-#define UCUNIT_WriteInt(n)    System_WriteInt(n)
+#define UCUNIT_WriteInt(n) System_WriteInt(n)
 
 /**
  * @Macro:       UCUNIT_Safestate()
@@ -99,7 +99,7 @@
  *                    ...
  *
  */
-#define UCUNIT_Safestate()         System_Safestate()
+#define UCUNIT_Safestate() System_Safestate()
 
 /**
  * @Macro:       UCUNIT_Recover()
@@ -118,7 +118,7 @@
  *                    ...
  *
  */
-#define UCUNIT_Recover()           System_Reset()
+#define UCUNIT_Recover() System_Reset()
 
 /**
  * @Macro:       UCUNIT_Init()
@@ -132,7 +132,7 @@
  *               a host computer.
  *
  */
-#define UCUNIT_Init()              System_Init()
+#define UCUNIT_Init() System_Init()
 
 /**
  * @Macro:       UCUNIT_Shutdown()
@@ -144,7 +144,7 @@
  *               tests.
  *
  */
-#define UCUNIT_Shutdown()          System_Shutdown()
+#define UCUNIT_Shutdown() System_Shutdown()
 
 /**
  * Verbose Mode.
@@ -172,7 +172,7 @@
 #define UCUNIT_VERSION "v1.1" /* Version info */
 
 #ifndef NULL
-#define NULL (void *)0
+#define NULL (void*)0
 #endif
 
 #ifndef TRUE
@@ -184,9 +184,11 @@
 #endif
 
 /* Action to take if check fails */
-#define UCUNIT_ACTION_WARNING   0 /* Goes through the checks
-                                     with message depending on level */
-#define UCUNIT_ACTION_SHUTDOWN  1 /* Stops on the end of the checklist
+#define UCUNIT_ACTION_WARNING                                                                      \
+  0 /* Goes through the checks                                                                     \
+       with message depending on level */
+#define UCUNIT_ACTION_SHUTDOWN                                                                     \
+  1                               /* Stops on the end of the checklist                             \
                                      if any check has failed */
 #define UCUNIT_ACTION_SAFESTATE 2 /* Goes in safe state if check fails */
 
@@ -198,13 +200,13 @@
 static int ucunit_checks_failed = 0; /* Numer of failed checks */
 static int ucunit_checks_passed = 0; /* Number of passed checks */
 
-static int ucunit_testcases_failed = 0; /* Number of failed test cases */
-static int ucunit_testcases_passed = 0; /* Number of passed test cases */
-static int ucunit_testcases_failed_checks = 0; /* Number of failed checks in a testcase */
-static int ucunit_checklist_failed_checks = 0; /* Number of failed checks in a checklist */
-static int ucunit_action = UCUNIT_ACTION_WARNING; /* Action to take if a check fails */
+static int ucunit_testcases_failed = 0;                /* Number of failed test cases */
+static int ucunit_testcases_passed = 0;                /* Number of passed test cases */
+static int ucunit_testcases_failed_checks = 0;         /* Number of failed checks in a testcase */
+static int ucunit_checklist_failed_checks = 0;         /* Number of failed checks in a checklist */
+static int ucunit_action = UCUNIT_ACTION_WARNING;      /* Action to take if a check fails */
 static int ucunit_checkpoints[UCUNIT_MAX_TRACEPOINTS]; /* Max. number of tracepoints */
-static int ucunit_index = 0; /* Tracepoint index */
+static int ucunit_index = 0;                           /* Tracepoint index */
 
 void ucunit_suppresswarnings()
 {
@@ -228,7 +230,7 @@ void ucunit_suppresswarnings()
  * @Remarks:     This macro is used by UCUNIT_DefineToString().
  *
  */
-#define UCUNIT_DefineToStringHelper(x)    #x
+#define UCUNIT_DefineToStringHelper(x) #x
 
 /**
  * @Macro:       UCUNIT_DefineToString(x)
@@ -240,7 +242,7 @@ void ucunit_suppresswarnings()
  * @Remarks:     This macro uses UCUNIT_DefineToStringHelper().
  *
  */
-#define UCUNIT_DefineToString(x)   UCUNIT_DefineToStringHelper(x)
+#define UCUNIT_DefineToString(x) UCUNIT_DefineToStringHelper(x)
 
 /**
  * @Macro:       UCUNIT_DefineToString(x)
@@ -266,17 +268,17 @@ void ucunit_suppresswarnings()
  *               to UCUNIT_MODE_NORMAL and UCUNIT_MODE_VERBOSE.
  *
  */
-#define UCUNIT_FailCheck(msg, args)                  \
-    do                                               \
-    {                                                \
-        if (UCUNIT_ACTION_SAFESTATE==ucunit_action)  \
-        {                                            \
-            UCUNIT_Safestate();                      \
-        }                                            \
-        UCUNIT_WriteFailedMsg(msg, args);            \
-        ucunit_checks_failed++;                      \
-        ucunit_checklist_failed_checks++;            \
-    } while(0)
+#define UCUNIT_FailCheck(msg, args)                                                                \
+  do                                                                                               \
+  {                                                                                                \
+    if (UCUNIT_ACTION_SAFESTATE == ucunit_action)                                                  \
+    {                                                                                              \
+      UCUNIT_Safestate();                                                                          \
+    }                                                                                              \
+    UCUNIT_WriteFailedMsg(msg, args);                                                              \
+    ucunit_checks_failed++;                                                                        \
+    ucunit_checklist_failed_checks++;                                                              \
+  } while (0)
 
 /**
  * @Macro:       UCUNIT_PassCheck(msg, args)
@@ -292,12 +294,12 @@ void ucunit_suppresswarnings()
  *               to UCUNIT_MODE_VERBOSE.
  *
  */
-#define UCUNIT_PassCheck(message, args)              \
-    do                                               \
-    {                                                \
-        UCUNIT_WritePassedMsg(message, args);        \
-        ucunit_checks_passed++;                      \
-    } while(0)
+#define UCUNIT_PassCheck(message, args)                                                            \
+  do                                                                                               \
+  {                                                                                                \
+    UCUNIT_WritePassedMsg(message, args);                                                          \
+    ucunit_checks_passed++;                                                                        \
+  } while (0)
 
 /*****************************************************************************/
 /* Checklist Macros                                                          */
@@ -320,12 +322,12 @@ void ucunit_suppresswarnings()
  * @Remarks:     A checklist must be finished with UCUNIT_ChecklistEnd()
  *
  */
-#define UCUNIT_ChecklistBegin(action)                           \
-    do                                                          \
-    {                                                           \
-        ucunit_action = action;                                 \
-        ucunit_checklist_failed_checks = 0;                     \
-    } while (0)
+#define UCUNIT_ChecklistBegin(action)                                                              \
+  do                                                                                               \
+  {                                                                                                \
+    ucunit_action = action;                                                                        \
+    ucunit_checklist_failed_checks = 0;                                                            \
+  } while (0)
 
 /**
  * @Macro:       UCUNIT_ChecklistEnd()
@@ -336,19 +338,19 @@ void ucunit_suppresswarnings()
  * @Remarks:     A checklist must begin with UCUNIT_ChecklistBegin(action)
  *
  */
-#define UCUNIT_ChecklistEnd()                         \
-    if (ucunit_checklist_failed_checks!=0)            \
-    {                                                 \
-        UCUNIT_WriteFailedMsg("Checklist","");        \
-        if (UCUNIT_ACTION_SHUTDOWN==ucunit_action)    \
-        {                                             \
-            UCUNIT_Shutdown();                        \
-        }                                             \
-    }                                                 \
-    else                                              \
-    {                                                 \
-        UCUNIT_WritePassedMsg("Checklist","");        \
-    }
+#define UCUNIT_ChecklistEnd()                                                                      \
+  if (ucunit_checklist_failed_checks != 0)                                                         \
+  {                                                                                                \
+    UCUNIT_WriteFailedMsg("Checklist", "");                                                        \
+    if (UCUNIT_ACTION_SHUTDOWN == ucunit_action)                                                   \
+    {                                                                                              \
+      UCUNIT_Shutdown();                                                                           \
+    }                                                                                              \
+  }                                                                                                \
+  else                                                                                             \
+  {                                                                                                \
+    UCUNIT_WritePassedMsg("Checklist", "");                                                        \
+  }
 
 /*****************************************************************************/
 /* Check Macros                                                              */
@@ -365,8 +367,15 @@ void ucunit_suppresswarnings()
  * @Remarks:     Basic check. This macro is used by all higher level checks.
  *
  */
-#define UCUNIT_Check(condition, msg, args)             \
-    if ( (condition) ) { UCUNIT_PassCheck(msg, args); } else { UCUNIT_FailCheck(msg, args); }
+#define UCUNIT_Check(condition, msg, args)                                                         \
+  if ((condition))                                                                                 \
+  {                                                                                                \
+    UCUNIT_PassCheck(msg, args);                                                                   \
+  }                                                                                                \
+  else                                                                                             \
+  {                                                                                                \
+    UCUNIT_FailCheck(msg, args);                                                                   \
+  }
 
 /**
  * @Macro:       UCUNIT_CheckIsEqual(expected,actual)
@@ -379,8 +388,8 @@ void ucunit_suppresswarnings()
  * @Remarks:     This macro uses UCUNIT_Check(condition, msg, args).
  *
  */
-#define UCUNIT_CheckIsEqual(expected,actual)         \
-    UCUNIT_Check( (expected) == (actual), "IsEqual", UCUNIT_ArgsToString(expected, actual) )
+#define UCUNIT_CheckIsEqual(expected, actual)                                                      \
+  UCUNIT_Check((expected) == (actual), "IsEqual", UCUNIT_ArgsToString(expected, actual))
 
 /**
  * @Macro:       UCUNIT_CheckIsNotEqual(unexpected,actual)
@@ -393,8 +402,8 @@ void ucunit_suppresswarnings()
  * @Remarks:     This macro uses UCUNIT_Check(condition, msg, args).
  *
  */
-#define UCUNIT_CheckIsNotEqual(unexpected,actual)         \
-    UCUNIT_Check( (unexpected) != (actual), "IsNotEqual", UCUNIT_ArgsToString(unexpected, actual) )
+#define UCUNIT_CheckIsNotEqual(unexpected, actual)                                                 \
+  UCUNIT_Check((unexpected) != (actual), "IsNotEqual", UCUNIT_ArgsToString(unexpected, actual))
 
 /**
  * @Macro:       UCUNIT_CheckIsNull(pointer)
@@ -406,8 +415,7 @@ void ucunit_suppresswarnings()
  * @Remarks:     This macro uses UCUNIT_Check(condition, msg, args).
  *
  */
-#define UCUNIT_CheckIsNull(pointer)                  \
-    UCUNIT_Check( (pointer) == NULL, "IsNull", #pointer)
+#define UCUNIT_CheckIsNull(pointer) UCUNIT_Check((pointer) == NULL, "IsNull", #pointer)
 
 /**
  * @Macro:       UCUNIT_CheckIsNotNull(pointer)
@@ -419,8 +427,7 @@ void ucunit_suppresswarnings()
  * @Remarks:     This macro uses UCUNIT_Check(condition, msg, args).
  *
  */
-#define UCUNIT_CheckIsNotNull(pointer)               \
-    UCUNIT_Check( (pointer) != NULL, "IsNotNull", #pointer)
+#define UCUNIT_CheckIsNotNull(pointer) UCUNIT_Check((pointer) != NULL, "IsNotNull", #pointer)
 
 /**
  * @Macro:       UCUNIT_CheckIsInRange(value, lower, upper)
@@ -435,8 +442,9 @@ void ucunit_suppresswarnings()
  * @Remarks:     This macro uses UCUNIT_Check(condition, msg, args).
  *
  */
-#define UCUNIT_CheckIsInRange(value, lower, upper)   \
-    UCUNIT_Check( ( (value>=lower) && (value<=upper) ), "IsInRange", UCUNIT_ArgsToString(value, lower, upper))
+#define UCUNIT_CheckIsInRange(value, lower, upper)                                                 \
+  UCUNIT_Check(((value >= lower) && (value <= upper)), "IsInRange",                                \
+               UCUNIT_ArgsToString(value, lower, upper))
 
 /**
  * @Macro:       UCUNIT_CheckIs8Bit(value)
@@ -448,8 +456,7 @@ void ucunit_suppresswarnings()
  * @Remarks:     This macro uses UCUNIT_Check(condition, msg, args).
  *
  */
-#define UCUNIT_CheckIs8Bit(value)                      \
-    UCUNIT_Check( value==(value & 0xFF), "Is8Bit", #value )
+#define UCUNIT_CheckIs8Bit(value) UCUNIT_Check(value == (value & 0xFF), "Is8Bit", #value)
 
 /**
  * @Macro:       UCUNIT_CheckIs16Bit(value)
@@ -461,8 +468,7 @@ void ucunit_suppresswarnings()
  * @Remarks:     This macro uses UCUNIT_Check(condition, msg, args).
  *
  */
-#define UCUNIT_CheckIs16Bit(value)                     \
-    UCUNIT_Check( value==(value & 0xFFFF), "Is16Bit", #value )
+#define UCUNIT_CheckIs16Bit(value) UCUNIT_Check(value == (value & 0xFFFF), "Is16Bit", #value)
 
 /**
  * @Macro:       UCUNIT_CheckIs32Bit(value)
@@ -474,8 +480,7 @@ void ucunit_suppresswarnings()
  * @Remarks:     This macro uses UCUNIT_Check(condition, msg, args).
  *
  */
-#define UCUNIT_CheckIs32Bit(value)                     \
-    UCUNIT_Check( value==(value & 0xFFFFFFFF), "Is32Bit", #value )
+#define UCUNIT_CheckIs32Bit(value) UCUNIT_Check(value == (value & 0xFFFFFFFF), "Is32Bit", #value)
 
 /**
  * Checks if bit is set
@@ -491,8 +496,8 @@ void ucunit_suppresswarnings()
  * @Remarks:     This macro uses UCUNIT_Check(condition, msg, args).
  *
  */
-#define UCUNIT_CheckIsBitSet(value, bitno) \
-    UCUNIT_Check( (1==(((value)>>(bitno)) & 0x01) ), "IsBitSet", UCUNIT_ArgsToString(value, bitno))
+#define UCUNIT_CheckIsBitSet(value, bitno)                                                         \
+  UCUNIT_Check((1 == (((value) >> (bitno)) & 0x01)), "IsBitSet", UCUNIT_ArgsToString(value, bitno))
 
 /**
  * @Macro:       UCUNIT_CheckIsBitClear(value, bitno)
@@ -505,8 +510,9 @@ void ucunit_suppresswarnings()
  * @Remarks:     This macro uses UCUNIT_Check(condition, msg, args).
  *
  */
-#define UCUNIT_CheckIsBitClear(value, bitno) \
-    UCUNIT_Check( (0==(((value)>>(bitno)) & 0x01) ), "IsBitClear", UCUNIT_ArgsToString(value, bitno))
+#define UCUNIT_CheckIsBitClear(value, bitno)                                                       \
+  UCUNIT_Check((0 == (((value) >> (bitno)) & 0x01)), "IsBitClear",                                 \
+               UCUNIT_ArgsToString(value, bitno))
 
 /*****************************************************************************/
 /* Support for code coverage */
@@ -518,7 +524,7 @@ void ucunit_suppresswarnings()
  * @Description: Marks a trace point.
  *               If a trace point is executed, its coverage state switches
  *               from 0 to the line number.
-  *              If a trace point was never executed, the state
+ *              If a trace point was never executed, the state
  *               remains 0.
  *
  * @Param index: Index of the tracepoint.
@@ -526,15 +532,15 @@ void ucunit_suppresswarnings()
  * @Remarks:     This macro fails if index>UCUNIT_MAX_TRACEPOINTS.
  *
  */
-#define UCUNIT_Tracepoint(index)                         \
-    if(index<UCUNIT_MAX_TRACEPOINTS)                     \
-    {                                                    \
-        ucunit_checkpoints[index] = __LINE__;            \
-    }                                                    \
-    else                                                 \
-    {                                                    \
-        UCUNIT_WriteFailedMsg("Tracepoint index", #index);     \
-    }
+#define UCUNIT_Tracepoint(index)                                                                   \
+  if (index < UCUNIT_MAX_TRACEPOINTS)                                                              \
+  {                                                                                                \
+    ucunit_checkpoints[index] = __LINE__;                                                          \
+  }                                                                                                \
+  else                                                                                             \
+  {                                                                                                \
+    UCUNIT_WriteFailedMsg("Tracepoint index", #index);                                             \
+  }
 
 /**
  * @Macro:       UCUNIT_ResetTracepointCoverage()
@@ -546,11 +552,11 @@ void ucunit_suppresswarnings()
  * @Remarks:     This macro fails if index>UCUNIT_MAX_TRACEPOINTS.
  *
  */
-#define UCUNIT_ResetTracepointCoverage()                    \
-    for (ucunit_index=0; ucunit_index<UCUNIT_MAX_TRACEPOINTS; ucunit_index++) \
-    {                                                \
-        ucunit_checkpoints[ucunit_index]=0;          \
-    }
+#define UCUNIT_ResetTracepointCoverage()                                                           \
+  for (ucunit_index = 0; ucunit_index < UCUNIT_MAX_TRACEPOINTS; ucunit_index++)                    \
+  {                                                                                                \
+    ucunit_checkpoints[ucunit_index] = 0;                                                          \
+  }
 
 /**
  * @Macro:       UCUNIT_CheckTracepointCoverage(index)
@@ -562,8 +568,8 @@ void ucunit_suppresswarnings()
  * @Remarks:     This macro fails if index>UCUNIT_MAX_TRACEPOINTS.
  *
  */
-#define UCUNIT_CheckTracepointCoverage(index)    \
-    UCUNIT_Check( (ucunit_checkpoints[index]!=0), "TracepointCoverage", #index);
+#define UCUNIT_CheckTracepointCoverage(index)                                                      \
+  UCUNIT_Check((ucunit_checkpoints[index] != 0), "TracepointCoverage", #index);
 
 #ifdef UCUNIT_MODE_JSON
 #include "uCUnit-json.h"

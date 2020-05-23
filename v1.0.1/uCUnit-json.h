@@ -1,7 +1,6 @@
 #ifndef UCUNIT_JSON_H_
 #define UCUNIT_JSON_H_
 
-
 /**
  * @Macro:       UCUNIT_TestBegin(name)
  *
@@ -11,20 +10,19 @@
  *
  *
  */
-#define UCUNIT_TestBegin(name)                        \
-    do                                                          \
-    {                                                           \
-        UCUNIT_WriteString("{\"name\":\"");                           \
-        UCUNIT_WriteString(name);\
-        UCUNIT_WriteString("\", \"compiled\":\"");                                \
-        UCUNIT_WriteString(__DATE__);    \
-        UCUNIT_WriteString("\", \"time\":\"");                                \
-        UCUNIT_WriteString(__TIME__);    \
-        UCUNIT_WriteString("\", \"version\":\"");     \
-        UCUNIT_WriteString(UCUNIT_VERSION);        \
-        UCUNIT_WriteString("\", \"testcases\":[");     \
-    } while(0)
-
+#define UCUNIT_TestBegin(name)                                                                     \
+  do                                                                                               \
+  {                                                                                                \
+    UCUNIT_WriteString("{\"name\":\"");                                                            \
+    UCUNIT_WriteString(name);                                                                      \
+    UCUNIT_WriteString("\", \"compiled\":\"");                                                     \
+    UCUNIT_WriteString(__DATE__);                                                                  \
+    UCUNIT_WriteString("\", \"time\":\"");                                                         \
+    UCUNIT_WriteString(__TIME__);                                                                  \
+    UCUNIT_WriteString("\", \"version\":\"");                                                      \
+    UCUNIT_WriteString(UCUNIT_VERSION);                                                            \
+    UCUNIT_WriteString("\", \"testcases\":[");                                                     \
+  } while (0)
 
 /**
  * @Macro:       UCUNIT_WritePassedMsg(msg, args)
@@ -40,19 +38,19 @@
  *               to UCUNIT_MODE_VERBOSE.
  *
  */
-#define UCUNIT_WritePassedMsg(msg, args)                        \
-    do                                                          \
-    {                                                           \
-        UCUNIT_WriteString("{\"file\":\"");                                \
-        UCUNIT_WriteString(__FILE__);                           \
-        UCUNIT_WriteString("\", \"line\":\"");                                \
-        UCUNIT_WriteString(UCUNIT_DefineToString(__LINE__));    \
-        UCUNIT_WriteString("\", \"result\":\"passed\",  \"msg\":\"");                        \
-        UCUNIT_WriteString(msg);                                \
-        UCUNIT_WriteString("\", \"args\":\"");                                \
-        UCUNIT_WriteString(UCUNIT_DefineToString(args));                               \
-        UCUNIT_WriteString("\"},\n");                              \
-    } while(0)
+#define UCUNIT_WritePassedMsg(msg, args)                                                           \
+  do                                                                                               \
+  {                                                                                                \
+    UCUNIT_WriteString("{\"file\":\"");                                                            \
+    UCUNIT_WriteString(__FILE__);                                                                  \
+    UCUNIT_WriteString("\", \"line\":\"");                                                         \
+    UCUNIT_WriteString(UCUNIT_DefineToString(__LINE__));                                           \
+    UCUNIT_WriteString("\", \"result\":\"passed\",  \"msg\":\"");                                  \
+    UCUNIT_WriteString(msg);                                                                       \
+    UCUNIT_WriteString("\", \"args\":\"");                                                         \
+    UCUNIT_WriteString(args);                                                                      \
+    UCUNIT_WriteString("\"},\n");                                                                  \
+  } while (0)
 
 /**
  * @Macro:       UCUNIT_WriteFailedMsg(msg, args)
@@ -68,19 +66,19 @@
  *               to UCUNIT_MODE_NORMAL and UCUNIT_MODE_VERBOSE.
  *
  */
-#define UCUNIT_WriteFailedMsg(msg, args)                        \
-    do                                                          \
-    {                                                           \
-      UCUNIT_WriteString("{\"file\":\"");                                \
-      UCUNIT_WriteString(__FILE__);                           \
-      UCUNIT_WriteString("\", \"line\":\"");                                \
-      UCUNIT_WriteString(UCUNIT_DefineToString(__LINE__));    \
-      UCUNIT_WriteString("\", \"result\":\"failed\",  \"msg\":\"");                        \
-      UCUNIT_WriteString(msg);                                \
-      UCUNIT_WriteString("\", \"args\":\"");                                \
-      UCUNIT_WriteString(UCUNIT_DefineToString(args));                               \
-      UCUNIT_WriteString("\"},\n");                              \
-    } while(0)
+#define UCUNIT_WriteFailedMsg(msg, args)                                                           \
+  do                                                                                               \
+  {                                                                                                \
+    UCUNIT_WriteString("{\"file\":\"");                                                            \
+    UCUNIT_WriteString(__FILE__);                                                                  \
+    UCUNIT_WriteString("\", \"line\":\"");                                                         \
+    UCUNIT_WriteString(UCUNIT_DefineToString(__LINE__));                                           \
+    UCUNIT_WriteString("\", \"result\":\"failed\",  \"msg\":\"");                                  \
+    UCUNIT_WriteString(msg);                                                                       \
+    UCUNIT_WriteString("\", \"args\":\"");                                                         \
+    UCUNIT_WriteString(args);                                                                      \
+    UCUNIT_WriteString("\"},\n");                                                                  \
+  } while (0)
 
 /**
  * @Macro:       UCUNIT_TestcaseBegin(name)
@@ -93,15 +91,14 @@
  * @Remarks:     This macro uses UCUNIT_WriteString(msg) to print the name.
  *
  */
-#define UCUNIT_TestcaseBegin(name)                                        \
-    do                                                                    \
-    {                                                                     \
-        UCUNIT_WriteString("{ \"testcasename\":\""); \
-        UCUNIT_WriteString(name);                                         \
-        UCUNIT_WriteString("\", \"checks\":[\n"); \
-        ucunit_testcases_failed_checks = ucunit_checks_failed;            \
-    }                                                                     \
-    while(0)
+#define UCUNIT_TestcaseBegin(name)                                                                 \
+  do                                                                                               \
+  {                                                                                                \
+    UCUNIT_WriteString("{ \"testcasename\":\"");                                                   \
+    UCUNIT_WriteString(name);                                                                      \
+    UCUNIT_WriteString("\", \"checks\":[\n");                                                      \
+    ucunit_testcases_failed_checks = ucunit_checks_failed;                                         \
+  } while (0)
 
 /**
  * @Macro:       UCUNIT_TestcaseEnd()
@@ -112,23 +109,22 @@
  * @Remarks:     This macro uses UCUNIT_WriteString(msg) to print the result.
  *
  */
-#define UCUNIT_TestcaseEnd()                                         \
-    do                                                               \
-    {                                                                \
-        UCUNIT_WriteString("{}]");              \
-        if( 0==(ucunit_testcases_failed_checks - ucunit_checks_failed) ) \
-        {                                                            \
-            UCUNIT_WriteString(", \"result\":\"passed\"\n");          \
-            ucunit_testcases_passed++;                               \
-        }                                                            \
-        else                                                         \
-        {                                                            \
-            UCUNIT_WriteString(", \"result\":\"failed\"\n");          \
-            ucunit_testcases_failed++;                               \
-        }                                                            \
-        UCUNIT_WriteString("},\n"); \
-    }                                                                \
-    while(0)
+#define UCUNIT_TestcaseEnd()                                                                       \
+  do                                                                                               \
+  {                                                                                                \
+    UCUNIT_WriteString("{}]");                                                                     \
+    if (0 == (ucunit_testcases_failed_checks - ucunit_checks_failed))                              \
+    {                                                                                              \
+      UCUNIT_WriteString(", \"result\":\"passed\"\n");                                             \
+      ucunit_testcases_passed++;                                                                   \
+    }                                                                                              \
+    else                                                                                           \
+    {                                                                                              \
+      UCUNIT_WriteString(", \"result\":\"failed\"\n");                                             \
+      ucunit_testcases_failed++;                                                                   \
+    }                                                                                              \
+    UCUNIT_WriteString("},\n");                                                                    \
+  } while (0)
 
 /*****************************************************************************/
 /* Testsuite Summary                                                         */
@@ -143,18 +139,18 @@
  *               UCUNIT_WriteInt(n) to write the summary.
  *
  */
-#define UCUNIT_WriteSummary()                                         \
-{                                                                     \
-    UCUNIT_WriteString("{}]\n");\
-    UCUNIT_WriteString(",\"failed\":\"");                      \
-    UCUNIT_WriteInt(ucunit_testcases_failed);                         \
-    UCUNIT_WriteString("\", \"passed\":\"");                      \
-    UCUNIT_WriteInt(ucunit_testcases_passed);                         \
-    UCUNIT_WriteString("\", \"checksFailed\":\"");                      \
-    UCUNIT_WriteInt(ucunit_checks_failed);                            \
-    UCUNIT_WriteString("\", \"checksPassed\":\"");                      \
-    UCUNIT_WriteInt(ucunit_checks_passed);                            \
-    UCUNIT_WriteString("\"}"); \
-}
+#define UCUNIT_WriteSummary()                                                                      \
+  {                                                                                                \
+    UCUNIT_WriteString("{}]\n");                                                                   \
+    UCUNIT_WriteString(",\"failed\":\"");                                                          \
+    UCUNIT_WriteInt(ucunit_testcases_failed);                                                      \
+    UCUNIT_WriteString("\", \"passed\":\"");                                                       \
+    UCUNIT_WriteInt(ucunit_testcases_passed);                                                      \
+    UCUNIT_WriteString("\", \"checksFailed\":\"");                                                 \
+    UCUNIT_WriteInt(ucunit_checks_failed);                                                         \
+    UCUNIT_WriteString("\", \"checksPassed\":\"");                                                 \
+    UCUNIT_WriteInt(ucunit_checks_passed);                                                         \
+    UCUNIT_WriteString("\"}\n");                                                                   \
+  }
 
 #endif /* UCUNIT_JSON_H_ */

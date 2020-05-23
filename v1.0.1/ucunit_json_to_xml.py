@@ -35,48 +35,48 @@ import subprocess
 from xml.dom import getDOMImplementation
 
 
-def checkToString(check):
+def check_to_str(check):
     return check["file"] + ":" + check["line"] + " " + check["msg"] + \
         "(" + check["args"] + ") " + check["result"] + "\n"
 
 
-def setProperty(doc, props, name, value):
-    p = doc.createElement("property")
-    p.setAttribute("name", name)
-    p.setAttribute("value", value)
-    props.appendChild(p)
+def set_property(doc, props, name, value):
+    prop = doc.createElement("property")
+    prop.setAttribute("name", name)
+    prop.setAttribute("value", value)
+    props.appendChild(prop)
 
 
-def prettyPrintJsonIfPossible(s):
+def pretty_print_json_if_possible(input_str):
     try:
-        j = json.loads(s)
+        j = json.loads(input_str)
     except json.decoder.JSONDecodeError:
-        print(s)
+        print(input_str)
         return
     print(json.dumps(j, indent=2))
 
 
 def main():
     try:
-        processOutput = subprocess.check_output(sys.argv[2:])
-        retVal = 0
-    except (OSError):
+        process_output = subprocess.check_output(sys.argv[2:])
+        ret_val = 0
+    except OSError:
         print("OSError. Process output:")
-        prettyPrintJsonIfPossible(processOutput)
+        pretty_print_json_if_possible(process_output)
         sys.exit(1)
     except subprocess.CalledProcessError as exc:
-        processOutput = exc.output
-        retVal = exc.returncode
+        process_output = exc.output
+        ret_val = exc.returncode
         print("CalledProcessError. Process output:")
-        prettyPrintJsonIfPossible(processOutput)
-        print("Return code: " + str(retVal))
+        pretty_print_json_if_possible(process_output)
+        print("Return code: " + str(ret_val))
 
-    inp = processOutput.decode('ascii')
+    inp = process_output.decode('ascii')
     try:
         data = json.loads(inp)
     except json.decoder.JSONDecodeError as err:
         print("Process output:")
-        print(processOutput)
+        print(process_output)
         print("Decoded output:")
         print(inp)
         print("End")
@@ -92,39 +92,39 @@ def main():
     root.setAttribute("errors", "0")
     root.setAttribute("failures", data["failed"])
     props = doc.createElement("properties")
-    setProperty(doc, props, "compiled", data["compiled"])
-    setProperty(doc, props, "time", data["time"])
-    setProperty(doc, props, "ucunit-version", data["version"])
+    set_property(doc, props, "compiled", data["compiled"])
+    set_property(doc, props, "time", data["time"])
+    set_property(doc, props, "ucunit-version", data["version"])
     root.appendChild(props)
 
-    for tc in data['testcases']:
-        if 'testcasename' in tc:
+    for testcase in data['testcases']:
+        if 'testcasename' in testcase:
             tcelement = doc.createElement('testcase')
-            tcelement.setAttribute("name", tc['testcasename'])
+            tcelement.setAttribute("name", testcase['testcasename'])
             failures = ""
             stdout = ""
-            for check in tc["checks"]:
+            for check in testcase["checks"]:
                 if "result" in check:
                     if check["result"] == "passed":
-                        stdout += checkToString(check)
+                        stdout += check_to_str(check)
                     else:
-                        failures += checkToString(check)
+                        failures += check_to_str(check)
             root.appendChild(tcelement)
             sysout = doc.createElement('system-out')
             sysout.appendChild(doc.createCDATASection(stdout))
             tcelement.appendChild(sysout)
-            if tc["result"] != "passed":
-                f = doc.createElement("failure")
-                f.appendChild(doc.createTextNode(failures))
-                tcelement.appendChild(f)
+            if testcase["result"] != "passed":
+                failure_elem = doc.createElement("failure")
+                failure_elem.appendChild(doc.createTextNode(failures))
+                tcelement.appendChild(failure_elem)
         else:
-            if tc:
+            if testcase:
                 raise Exception('Invalid test case')
 
     with open(sys.argv[1], mode='w') as fh:
         fh.write(doc.toxml('utf-8').decode('utf-8'))
 
-    sys.exit(retVal)
+    sys.exit(ret_val)
 
 
 if __name__ == "__main__":
