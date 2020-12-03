@@ -37,7 +37,7 @@
 /* PRQA MS UCUNIT_CheckStrEquals 2995 # operation is always 'true': happens when a const str is passed as an argument. */
 /* PRQA MS UCUNIT_CheckStrEquals 3415 # right hand side side effect: deliberate shortcut expression. */
 /* PRQA MS UCUNIT_CheckStrEquals 0752 # not ptr to const: depends on stdlib. */
-/* PRQA MS UCUNIT_CheckStrEquals 2836 # Existing unit test framework "ucunit" used. */
+/* PRQA MS UCUNIT_CheckStrEquals 2836 # non-null terminated string used in a string function. */
 #define UCUNIT_CheckStrEquals(expected, actual)                                                                             \
   UCUNIT_Check((((actual) != NULL) && (0 == strcmp((expected), (actual)))), "IsStrEqual",                                   \
                UCUNIT_ArgsToString(expected, actual))
