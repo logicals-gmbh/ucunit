@@ -16,13 +16,15 @@
 /* PRQA MS UCUNIT_TestcaseEnd 0752,3469 # Existing unit test framework "ucunit" used. */
 /* PRQA MS UCUNIT_ChecklistBegin 3432 # Existing unit test framework "ucunit" used. */
 /* PRQA MS UCUNIT_ChecklistEnd 2880,0752,2996,2992 # Existing unit test framework "ucunit" used. */
+/* PRQA MS UCUNIT_Check 0752 # Existing unit test framework "ucunit" used. */
 /* PRQA MS UCUNIT_CheckIsEqual 3469,0752,2992,2880,2996 # Existing unit test framework "ucunit" used. */
+/* PRQA MS UCUNIT_CheckIsNotEqual 0752 # Existing unit test framework "ucunit" used. */
 /* PRQA MS UCUNIT_CheckIsNull 0752 # Existing unit test framework "ucunit" used. */
+/* PRQA MS UCUNIT_CheckIsNotNull 0752 # Existing unit test framework "ucunit" used. */
 #include <uCUnit-v1.0.h>
 /* PRQA MS UCUNIT_ChecklistBeginWarning 3469,3432,3472 # Existing unit test framework "ucunit" used. */
 /* PRQA S 3472 1 # Existing unit test framework "ucunit" used. */
 #define UCUNIT_ChecklistBeginWarning() UCUNIT_ChecklistBegin(UCUNIT_ACTION_WARNING)
-
 
 /* -- Externals ------------------------------------------------------------- */
 
@@ -35,6 +37,7 @@
 /* PRQA MS UCUNIT_CheckStrEquals 2995 # operation is always 'true': happens when a const str is passed as an argument. */
 /* PRQA MS UCUNIT_CheckStrEquals 3415 # right hand side side effect: deliberate shortcut expression. */
 /* PRQA MS UCUNIT_CheckStrEquals 0752 # not ptr to const: depends on stdlib. */
+/* PRQA MS UCUNIT_CheckStrEquals 2836 # Existing unit test framework "ucunit" used. */
 #define UCUNIT_CheckStrEquals(expected, actual)                                                                             \
   UCUNIT_Check((((actual) != NULL) && (0 == strcmp((expected), (actual)))), "IsStrEqual",                                   \
                UCUNIT_ArgsToString(expected, actual))
