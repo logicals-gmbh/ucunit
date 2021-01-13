@@ -57,9 +57,11 @@ void System_Safestate(void)
 void System_WriteString(char* msg)
 {
   printf("%s", msg);
+  fflush(stdout);
 }
 
 void System_WriteInt(int n)
 {
   printf("%i", n);
+  fflush(stdout);
 }
