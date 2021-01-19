@@ -89,7 +89,7 @@ void System_WriteString(char* msg)
 
 void System_WriteStringQuoted(char* msg)
 {
-  while (msg != '\0')
+  while (*msg != '\0')
   {
     if (*msg != '\"')
     {
