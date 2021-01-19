@@ -61,6 +61,7 @@
  *               also to implement a putch(char c) function.
  */
 #define UCUNIT_WriteString(msg) System_WriteString(msg)
+#define UCUNIT_WriteStringQuoted(msg) System_WriteStringQuoted(msg)
 
 /**
  * @Macro:       UCUNIT_WriteInt(n)

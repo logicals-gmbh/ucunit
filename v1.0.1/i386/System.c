@@ -34,8 +34,10 @@
  * author.
  */
 #include "../System.h"
+#include "Strreplace.c"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 void System_Init(void)
 {
@@ -59,6 +61,14 @@ void System_WriteString(char* msg)
   printf("%s", msg);
   fflush(stdout);
 }
+
+void System_WriteStringQuoted(char* msg)
+{
+  msg = repl_str(msg, "\"", "\\\"");
+  printf("%s", msg);
+  fflush(stdout);
+}
+
 
 void System_WriteInt(int n)
 {
