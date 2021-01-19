@@ -34,59 +34,78 @@
  * If you cannot obtain a copy of the License, please contact the
  * author.
  */
+#include "../System.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "../System.h"
+
 
 /* Stub: Initialize your hardware here */
 void System_Init(void)
 {
 
-	printf("Init of hardware finished.\n");
+  printf("Init of hardware finished.\n");
 }
 
 /* Stub: Shutdown your hardware here */
 void System_Shutdown(void)
 {
 
-	/* asm("\tSTOP"); */
-	printf("System shutdown.\n");
-	exit(0);
+  /* asm("\tSTOP"); */
+  printf("System shutdown.\n");
+  exit(0);
 }
 
 /* Stub: Recover the system */
 void System_Recover(void)
 {
-	/* Stub: Recover the hardware */
-	/* asm("\tRESET"); */
-	printf("System reset.\n");
-	exit(0);
+  /* Stub: Recover the hardware */
+  /* asm("\tRESET"); */
+  printf("System reset.\n");
+  exit(0);
 }
 
 /* Stub: Put system in a safe state */
 void System_Safestate(void)
 {
-	/* Disable all port pins */
-	/* PORTA = 0x0000; */
-	/* PORTB = 0x0000; */
-	/* PORTC = 0x0000; */
+  /* Disable all port pins */
+  /* PORTA = 0x0000; */
+  /* PORTB = 0x0000; */
+  /* PORTC = 0x0000; */
 
-	/* Disable interrupts */
-	/* DIE(); */
+  /* Disable interrupts */
+  /* DIE(); */
 
-	/* Put processor into idle state */
-	/* asm("\tIDLE"); */
-	printf("System safe state.\n");
-	exit(0);
+  /* Put processor into idle state */
+  /* asm("\tIDLE"); */
+  printf("System safe state.\n");
+  exit(0);
 }
 
 /* Stub: Transmit a string to the host/debugger/simulator */
-void System_WriteString(char * msg)
+void System_WriteString(char* msg)
 {
-	printf(msg);
+  printf(msg);
+}
+
+void System_WriteStringQuoted(char* msg)
+{
+  while (*msg != '\0')
+  {
+    if (*msg != '\"')
+    {
+      putchar(*msg);
+    }
+    else
+    {
+      putchar('\\');
+      putchar('\"');
+    }
+
+    msg++;
+  }
 }
 
 void System_WriteInt(int n)
 {
-	printf("%i", n);
+  printf("%i", n);
 }

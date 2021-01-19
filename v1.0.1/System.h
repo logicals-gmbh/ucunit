@@ -41,7 +41,8 @@ void System_Init(void);
 void System_Shutdown(void);
 void System_Safestate(void);
 void System_Recover(void);
-void System_WriteString(char * msg);
+void System_WriteString(char* msg);
+void System_WriteStringQuoted(char* msg);
 void System_WriteInt(int n);
 
 #endif /* SYSTEM_H_ */

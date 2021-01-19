@@ -36,6 +36,7 @@
 #include "../System.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 void System_Init(void)
 {
@@ -58,6 +59,24 @@ void System_WriteString(char* msg)
 {
   printf("%s", msg);
   fflush(stdout);
+}
+
+void System_WriteStringQuoted(char* msg)
+{
+  while (*msg != '\0')
+  {
+    if (*msg != '\"')
+    {
+      putchar(*msg);
+    }
+    else
+    {
+      putchar('\\');
+      putchar('\"');
+    }
+
+    msg++;
+  }
 }
 
 void System_WriteInt(int n)
