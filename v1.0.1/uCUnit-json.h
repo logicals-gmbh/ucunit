@@ -76,7 +76,7 @@
     UCUNIT_WriteString("\", \"result\":\"failed\",  \"msg\":\"");                                                           \
     UCUNIT_WriteString(msg);                                                                                                \
     UCUNIT_WriteString("\", \"args\":\"");                                                                                  \
-    UCUNIT_WriteString(args);                                                                                               \
+    UCUNIT_WriteStringQuoted(args);                                                                                         \
     UCUNIT_WriteString("\"},\n");                                                                                           \
   } while (0)
 
