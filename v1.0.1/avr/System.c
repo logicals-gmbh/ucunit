@@ -106,7 +106,7 @@ void System_WriteString(char* s)
 
 void System_WriteStringQuoted(char* msg)
 {
-  while (msg != '\0')
+  while (*msg != '\0')
   {
     if (*msg != '\"')
     {
