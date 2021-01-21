@@ -123,7 +123,8 @@ def main():
                 raise Exception('Invalid test case')
 
     p = Path(sys.argv[1])
-    if p.is_dir():
+    print("TEST1:" + str(p.parents[1]))
+    if str(p.parents[1]) != ".":
         print("TEST:" + str(p))
         p.parents[0].mkdir(parents=True, exist_ok=True)
 
