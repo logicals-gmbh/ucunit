@@ -32,6 +32,7 @@
 import sys
 import json
 import subprocess
+from pathlib import Path
 from xml.dom import getDOMImplementation
 
 
@@ -120,6 +121,11 @@ def main():
         else:
             if testcase:
                 raise Exception('Invalid test case')
+
+    p = Path(sys.argv[1])
+    if p.is_dir():
+        print("TEST:" + str(p))
+        p.parents[0].mkdir(parents=True, exist_ok=True)
 
     with open(sys.argv[1], mode='w') as fh:
         fh.write(doc.toxml('utf-8').decode('utf-8'))
