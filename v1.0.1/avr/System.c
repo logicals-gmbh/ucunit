@@ -95,7 +95,7 @@ void uart_putc(char c)
 
 
 /* Stub: Transmit a string to the host/debugger/simulator */
-void System_WriteString(char* s)
+void System_WriteString(char const* s)
 {
   while (*s)
   {
@@ -104,7 +104,7 @@ void System_WriteString(char* s)
   }
 }
 
-void System_WriteStringQuoted(char* msg)
+void System_WriteStringQuoted(char const* msg)
 {
   while (*msg != '\0')
   {
