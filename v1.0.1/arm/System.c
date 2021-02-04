@@ -82,12 +82,12 @@ void System_Safestate(void)
 }
 
 /* Stub: Transmit a string to the host/debugger/simulator */
-void System_WriteString(char* msg)
+void System_WriteString(char const* msg)
 {
   printf(msg);
 }
 
-void System_WriteStringQuoted(char* msg)
+void System_WriteStringQuoted(char const* msg)
 {
   while (*msg != '\0')
   {
