@@ -25,6 +25,10 @@
 /* PRQA MS UCUNIT_ChecklistBeginWarning 3469,3432,3472 # Existing unit test framework "ucunit" used. */
 /* PRQA S 3472 1 # Existing unit test framework "ucunit" used. */
 #define UCUNIT_ChecklistBeginWarning() UCUNIT_ChecklistBegin(UCUNIT_ACTION_WARNING)
+/* PRQA MS CMN_GET_CTX 0316 # Add suppression for 0316, which is already suppressed in icommon_types_macros.h,
+   but using the -quiet option for the "src" folder, this suppression is not active, so it is placed here. */
+/* PRQA MS CMN_GET_CONST_CTX 0316 # Add suppression for 0316, which is already suppressed in icommon_types_macros.h,
+   but using the -quiet option for the "src" folder, this suppression is not active, so it is placed here. */
 
 /* -- Externals ------------------------------------------------------------- */
 
