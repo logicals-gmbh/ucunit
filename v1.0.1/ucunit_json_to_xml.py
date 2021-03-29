@@ -120,7 +120,8 @@ def main():
                 tcelement.appendChild(failure_elem)
         else:
             if testcase:
-                raise Exception('Invalid test case')
+                raise Exception('ERROR: Invalid test case! At line ' + str(testcase['line']) + ' in file ' + str(testcase['file']) +
+                                ' one assert is not between a UCUNIT_TestcaseBegin and a UCUNIT_TestcaseEnd statement! YOU HAVE TO FIX THIS!')
 
     p = Path(sys.argv[1])
     if str(p.parents[1]) != ".":
